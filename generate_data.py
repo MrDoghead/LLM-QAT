@@ -11,15 +11,19 @@ import json
 import sys
 import os
 
+model_path = "/data/models/Llama-2-7b-hf"
+
 print("Loading tokenizer")
-tokenizer = AutoTokenizer.from_pretrained("decapoda-research/llama-7b-hf")
+#tokenizer = AutoTokenizer.from_pretrained("decapoda-research/llama-7b-hf")
+tokenizer = AutoTokenizer.from_pretrained(model_path)
 print("Tokenizer loaded!")
 print("Loading model")
-model = AutoModelForCausalLM.from_pretrained("decapoda-research/llama-7b-hf")
+#model = AutoModelForCausalLM.from_pretrained("decapoda-research/llama-7b-hf")
+model = AutoModelForCausalLM.from_pretrained(model_path)
 model = model.cuda()
 print("Model loaded!")
 
-n_vocab = 500 # number of initial tokens for synthesizing data on each GPU.
+n_vocab = 2000 # number of initial tokens for synthesizing data on each GPU.
 
 i_start = sys.argv[1]
 if os.path.exists("gen_data/gen.chunk."+str(i_start).zfill(2)+".jsonl"):
